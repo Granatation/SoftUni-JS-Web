@@ -1,8 +1,12 @@
 const express = require('express');
+const fs = require('fs');
+const { catMiddleware } = require('./middlewares');
 
 const app = express();
 
 const port = 5000;
+
+app.use('/img', express.static('img'));
 
 app.get('/', (req, res) => {
     //Does the same
@@ -13,19 +17,34 @@ app.get('/', (req, res) => {
     res.send('Hello');
 });
 
-app.get('/cats', (req, res) => {
+app.post('/', (req, res) => {
     res.status(200);
-    res.send('Cats');
+    res.send('Post request to the home page');
+});
+
+app.get('/cats', catMiddleware, (req, res) => {
+    if (req.cats.length > 0) {
+        res.send(req.cats.join(', '));
+    } else {
+        res.send('No cats in here!');
+    }
+});
+
+app.post('/cats/:catName', catMiddleware, (req, res) => {
+    req.cats.push(req.params.catName);
+
+    res.status(201);
+    res.send(`Add ${req.params.catName} to the collection`);
+});
+
+app.get('/cats/:catId(\\d+)', catMiddleware, (req, res) => {
+    let catId = Number(req.params.catId);
+    res.send(req.cats[catId]);
 });
 
 app.get('/cat*', (req, res) => {
     res.status(200);
     res.send('Every path starting with cat');
-});
-
-app.post('/', (req, res) => {
-    res.status(200);
-    res.send('Post request to the home page');
 });
 
 app.get('/download', (req, res) => {
@@ -57,5 +76,7 @@ app.get('*', (req, res) => {
     res.status(200);
     res.send('Page not found');
 });
+
+
 
 app.listen(port, () => console.log(`Express running on port ${port}`));
