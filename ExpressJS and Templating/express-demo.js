@@ -39,7 +39,18 @@ app.get('/download', (req, res) => {
     readStream.pipe(res);
 
     //Does the same
-    res.download('balkan_74_68_ticha.pdf')
+    res.download('balkan_74_68_ticha.pdf');
+});
+
+app.get('/redirect', (req, res) => {
+    res.writeHead(302, {
+        'Location': '/cats'
+    });
+
+    res.end();
+
+    //Does the same
+    res.redirect('/cats');
 });
 
 app.get('*', (req, res) => {
