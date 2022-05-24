@@ -28,6 +28,20 @@ app.post('/', (req, res) => {
     res.send('Post request to the home page');
 });
 
+app.get('/download', (req, res) => {
+    res.writeHead(200, {
+        'content-type': 'application/pdf',
+        'content-disposition': 'inline' // 'attachment'
+    });
+
+    const readStream = fs.createReadStream('balkan_74_68_ticha.pdf');
+
+    readStream.pipe(res);
+
+    //Does the same
+    res.download('balkan_74_68_ticha.pdf')
+});
+
 app.get('*', (req, res) => {
     res.status(200);
     res.send('Page not found');
