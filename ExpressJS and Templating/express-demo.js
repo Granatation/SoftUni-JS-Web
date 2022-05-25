@@ -1,20 +1,38 @@
 const express = require('express');
 const fs = require('fs');
 const { catMiddleware } = require('./middlewares');
+const handlebars = require('express-handlebars');
 
 const app = express();
 
 const port = 5000;
 
+const users = [
+    { name: 'Pesho', age: 20 },
+    { name: 'Gosho', age: 21 },
+    { name: 'Niko', age: 17 }
+];
+
+app.engine('hbs', handlebars.engine({
+    extname: 'hbs'
+}));
+app.set('view engine', 'hbs');
+
 app.use('/img', express.static('img'));
 
-app.get('/', (req, res) => {
+app.get('/:name?', catMiddleware, (req, res) => {
     //Does the same
     // res.write('Hello');
     // res.end();
 
-    res.status(200);
-    res.send('Hello');
+    // res.status(200);
+    // res.send('Hello world!');
+
+    res.render('home', {
+        name: req.params.name || 'guest',
+        users,
+        isAuth: false
+    });
 });
 
 app.post('/', (req, res) => {
