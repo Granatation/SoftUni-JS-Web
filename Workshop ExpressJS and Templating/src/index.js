@@ -7,6 +7,8 @@ const port = 5000;
 
 app.use('/static', express.static('Workshop ExpressJS and Templating/public'));
 
+app.use(express.urlencoded({ extended: false }))
+
 app.engine('hbs', handlebars.engine({
     extname: 'hbs'
 }));
