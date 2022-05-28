@@ -1,4 +1,5 @@
-[{
+[
+    {
         "id": 0,
         "name": "Gan356 Air SM",
         "imageUrl": "https://ae01.alicdn.com/kf/HTB1CSddXRxRMKJjy0Fdq6yifFXa6/Gan-356-Air-SM-3x3-Black-Magic-cube-GAN-Air-SM-Magnetic-3x3x3-Speed-cube-gans.jpg",
@@ -42,5 +43,12 @@
         "description": "Aaaaaaaaaaa",
         "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/Rubiks_cube_solved.jpg",
         "difficultyLevel": "3"
+    },
+    {
+        "id": 7,
+        "name": "New",
+        "description": "aaaaaaaaaaa abarasha",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/Rubiks_cube_solved.jpg",
+        "difficultyLevel": "1"
     }
 ]
