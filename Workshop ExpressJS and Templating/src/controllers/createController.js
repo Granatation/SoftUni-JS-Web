@@ -1,6 +1,4 @@
-const cubes = require('../db.json');
-const fs = require('fs/promises');
-const path = require('path');
+const cubeService = require('../services/cubeService');
 
 exports.indexGet = (req, res) => {
     res.render('create');
@@ -13,8 +11,7 @@ exports.indexPost = (req, res) => {
         return res.status(400).send("invalid request");
     }
 
-    cubes.push(cube)
-    fs.writeFile(path.resolve('Workshop ExpressJS and Templating', 'src/db.json'), JSON.stringify(cubes), { encoding: 'utf-8' })
+    cubeService.save(cube)
         .then(() => {
             res.redirect('/');
         })
