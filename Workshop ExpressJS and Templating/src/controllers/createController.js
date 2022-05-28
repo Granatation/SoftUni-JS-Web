@@ -1,6 +1,6 @@
 const cubes = require('../db.json');
-
 const fs = require('fs/promises');
+const path = require('path');
 
 exports.indexGet = (req, res) => {
     res.render('create');
@@ -14,7 +14,7 @@ exports.indexPost = (req, res) => {
     }
 
     cubes.push(cube)
-    fs.writeFile('../db.json', JSON.stringify(cubes))
+    fs.writeFile(path.resolve('Workshop ExpressJS and Templating', 'src/db.json'), JSON.stringify(cubes), { encoding: 'utf-8' })
         .then(() => {
             res.redirect('/');
         })

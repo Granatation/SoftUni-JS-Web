@@ -1,27 +1,27 @@
 {
-  "name": "softuni-js-web",
-  "version": "1.0.0",
-  "description": "",
-  "main": "/Workshop ExpressJS and Templating/src/index.js",
-  "scripts": {
-    "start": "cd /Workshop ExpressJS and Templating && nodemon /Workshop ExpressJS and Templating/src/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Granatation/SoftUni-JS-Web.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Granatation/SoftUni-JS-Web/issues"
-  },
-  "homepage": "https://github.com/Granatation/SoftUni-JS-Web#readme",
-  "dependencies": {
-    "express": "^4.18.1",
-    "express-handlebars": "^6.0.6"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
-  }
+    "name": "softuni-js-web",
+    "version": "1.0.0",
+    "description": "",
+    "main": "/Workshop ExpressJS and Templating/src/index.js",
+    "scripts": {
+        "start": "cd /Workshop ExpressJS and Templating && nodemon /Workshop ExpressJS and Templating/src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Granatation/SoftUni-JS-Web.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Granatation/SoftUni-JS-Web/issues"
+    },
+    "homepage": "https://github.com/Granatation/SoftUni-JS-Web#readme",
+    "dependencies": {
+        "express": "^4.18.1",
+        "express-handlebars": "^6.0.6"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.16"
+    }
 }
