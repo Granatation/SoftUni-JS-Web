@@ -12,8 +12,8 @@ mongoose.connect(url)
         console.log('DB Connected');
     })
     .catch((err) => {
-        console.log('DB Error: ', err);
-    });
+        console.log('DB ERror: ', err);
+    })
 
 app.use(express.urlencoded({ extended: false }));
 app.engine('hbs', hbs.engine({
@@ -21,6 +21,8 @@ app.engine('hbs', hbs.engine({
 }));
 
 app.set('view engine', 'hbs');
+app.set('views', './NoSQL & MongoDB/mongoose-demo/views');
+
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -28,4 +30,4 @@ app.get('/', (req, res) => {
 
 app.use('/movies', movieController);
 
-app.listen(5000, () => console.log('Server is listening on port 5000'));
+app.listen(5000, () => console.log('Server is listening on port 5000...'));
