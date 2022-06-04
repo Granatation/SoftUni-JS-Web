@@ -1,7 +1,7 @@
 const Cube = require('../models/cube');
 const Accessory = require('../models/accessory');
 
-exports.getOne = (id) => Cube.findById(id);
+exports.getOne = (id) => Cube.findById(id).populate('accessories');
 
 exports.getAll = async(search, from, to) => {
     let cubes = await Cube.find().lean();
