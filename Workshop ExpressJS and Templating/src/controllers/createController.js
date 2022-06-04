@@ -11,7 +11,7 @@ exports.indexPost = (req, res) => {
         return res.status(400).send("invalid request");
     }
 
-    cubeService.save(cube)
+    cubeService.create(cube)
         .then(() => {
             res.redirect('/');
         })
