@@ -1,7 +1,7 @@
 const cubeService = require('../services/cubeService');
 
-exports.index = (req, res) => {
-    const cube = cubeService.getOne(req.params.id)
+exports.index = async(req, res) => {
+    const cube = await cubeService.getOne(req.params.id).lean();
 
     res.render('details', {...cube });
 };
