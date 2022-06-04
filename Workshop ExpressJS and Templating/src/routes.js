@@ -14,5 +14,6 @@ router.get('/create', createController.indexGet);
 router.post('/create', createController.indexPost);
 router.get('/details/:id', detailsController.index);
 router.get('/accessory/create', accessoryController.index);
+router.post('/accessory/create', accessoryController.indexPost);
 
 module.exports = router;
