@@ -6,6 +6,7 @@ exports.indexGet = (req, res) => {
 
 exports.indexPost = (req, res) => {
     const cube = req.body;
+    cube.owner = req.user._id;
 
     if (cube.name.length < 2) {
         return res.status(400).send("invalid request");
