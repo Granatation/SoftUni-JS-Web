@@ -21,13 +21,16 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async(req, res) => {
-    const isValid = await authService.login(req.body);
+    let token = await authService.login(req.body);
 
-    if (isValid) {
-        res.redirect('/');
-    } else {
-        res.redirect('/404');
+    if (!token) {
+        return res.redirect('/404');
     }
+
+    res.cookie('session', token)
+
+    res.redirect('/');
+
 });
 
 module.exports = router;
