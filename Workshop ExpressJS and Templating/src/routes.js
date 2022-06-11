@@ -10,6 +10,7 @@ const accessoryController = require('./controllers/accessoryController');
 const attachController = require('./controllers/attachControler');
 const authController = require('./controllers/authController');
 const editController = require('./controllers/editController');
+const deleteController = require('./controllers/deleteController');
 
 const router = express.Router();
 
@@ -25,6 +26,8 @@ router.post('/cube/:cubeId/accessory', attachController.indexPost);
 router.use('/auth', authController);
 router.get('/cube/:cubeId/edit', isAuth, editController.index);
 router.post('/cube/:cubeId/edit', editController.indexPost);
+router.get('/cube/:cubeId/delete', isAuth, deleteController.index);
+router.post('/cube/:cubeId/delete', deleteController.indexPost);
 router.use('*', (req, res) => {
     res.render('404');
 })
