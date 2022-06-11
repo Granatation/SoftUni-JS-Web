@@ -5,15 +5,29 @@ router.get('/register', (req, res) => {
     res.render('auth/registerPage')
 });
 
-router.post('/register', async(req, res) => {
-    const createdUser = await authService.register(req.body);
+router.post('/register', (req, res) => {
+    const createdUser = authService.register(req.body);
 
     if (createdUser) {
-        res.redirect('auth/loginPage')
+        res.redirect('login')
     } else {
-        res.redirect('404')
+        res.redirect('/404')
     }
 
+});
+
+router.get('/login', (req, res) => {
+    res.render('auth/loginPage')
+});
+
+router.post('/login', async(req, res) => {
+    const isValid = await authService.login(req.body);
+
+    if (isValid) {
+        res.redirect('/');
+    } else {
+        res.redirect('/404');
+    }
 });
 
 module.exports = router;
