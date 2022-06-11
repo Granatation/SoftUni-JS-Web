@@ -4,13 +4,13 @@ const { initializeDatabase } = require('./config/database');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-const port = 4000;
+const port = 5000;
 
 require('./config/handlebars')(app);
 
 app.use('/static', express.static('Workshop ExpressJS and Templating/public'));
 
-app.use(cookieParser)
+app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: false }))
 
