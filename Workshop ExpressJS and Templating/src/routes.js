@@ -1,6 +1,7 @@
 const express = require('express');
 const { isAuth } = require('./middlewares/authMiddleware');
-const { isOwner } = require('./middlewares/cubeMiddleware');
+const { body, validator } = require('express-validator');
+
 
 const homeController = require('./controllers/homeController');
 const aboutController = require('./controllers/aboutController');
@@ -17,7 +18,11 @@ const router = express.Router();
 router.get('/', homeController.index);
 router.get('/about', aboutController.index);
 router.get('/cube/create', isAuth, createController.indexGet);
-router.post('/cube/create', createController.indexPost);
+router.post('/cube/create',
+    isAuth,
+    body('name').not().isEmpty(),
+    body('description').isLength({ min: 5, max: 120 }),
+    createController.indexPost);
 router.get('/cube/details/:cubeId', detailsController.index);
 router.get('/accessory/create', isAuth, accessoryController.index);
 router.post('/accessory/create', accessoryController.indexPost);
