@@ -1,7 +1,8 @@
 const express = require('express');
 const { isAuth } = require('./middlewares/authMiddleware');
-const { body, validator } = require('express-validator');
-
+const { body } = require('express-validator');
+const Accessory = require('./models/accessory');
+const { modelVaidator } = require('./middlewares/modelValidatorMiddleware');
 
 const homeController = require('./controllers/homeController');
 const aboutController = require('./controllers/aboutController');
@@ -22,10 +23,11 @@ router.post('/cube/create',
     isAuth,
     body('name').not().isEmpty(),
     body('description').isLength({ min: 5, max: 120 }),
+    body('difiicultyLevel', 'Difficulty level is required to be in range 1 to 6').toInt().isInt({ min: 1, max: 6 }),
     createController.indexPost);
 router.get('/cube/details/:cubeId', detailsController.index);
 router.get('/accessory/create', isAuth, accessoryController.index);
-router.post('/accessory/create', accessoryController.indexPost);
+router.post('/accessory/create', modelVaidator(Accessory), accessoryController.indexPost);
 router.get('/cube/:cubeId/accessory', attachController.index);
 router.post('/cube/:cubeId/accessory', attachController.indexPost);
 router.use('/auth', authController);
