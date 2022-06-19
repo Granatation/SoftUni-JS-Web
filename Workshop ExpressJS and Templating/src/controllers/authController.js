@@ -7,17 +7,18 @@ router.get('/register', (req, res) => {
     res.render('auth/registerPage')
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', async(req, res, next) => {
 
     if (!isEmail(req.body.username)) {
-        return res.status(404).send('Invalid email');
+        // return res.status(404).send('Invalid email');
+        // next({ message: 'Invalid email' })
     }
-    const createdUser = authService.register(req.body);
+    try {
+        await authService.register(req.body);
 
-    if (createdUser) {
         res.redirect('login')
-    } else {
-        res.redirect('/404')
+    } catch (error) {
+        res.status(401).render('auth/registerPage', { error: error.message })
     }
 
 });
@@ -27,15 +28,21 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async(req, res) => {
-    let token = await authService.login(req.body);
+    try {
+        let token = await authService.login(req.body);
 
-    if (!token) {
-        return res.redirect('/404');
+        if (!token) {
+            return res.redirect('/404');
+        }
+
+        res.cookie(sessionName, token, { httpOnly: true });
+
+        res.redirect('/');
+    } catch (error) {
+        res.render('auth/loginPage', { error: error.message })
+
     }
 
-    res.cookie(sessionName, token, { httpOnly: true });
-
-    res.redirect('/');
 
 });
 

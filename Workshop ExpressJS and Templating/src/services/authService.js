@@ -7,7 +7,7 @@ const { secret, saltRounds } = require('../config/constants');
 exports.register = async({ username, password, repeatPassword }) => {
 
     if (password !== repeatPassword) {
-        return false
+        throw new Error('Invalid password')
     }
 
     let hashPass = await bcrypt.hash(password, saltRounds);
@@ -22,10 +22,13 @@ exports.register = async({ username, password, repeatPassword }) => {
 
 exports.login = async({ username, password }) => {
     let user = await User.findOne({ username });
+
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
-        return
+        throw {
+            message: 'Invalid username or password'
+        }
     }
 
     let result = new Promise((resolve, reject) => {

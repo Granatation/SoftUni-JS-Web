@@ -15,7 +15,7 @@
         <li><img class="logo" src="/static/images/logo.png"></li>
         <li><a href="/">Browse</a></li>
         <li><a href="/about">About</a></li>
-        
+
         {{#if user}}
         <li><a href="/cube/create">Add a Cube</a></li>
         <li><a href="/accessory/create">Add Accessory</a></li>
@@ -26,6 +26,12 @@
         {{/if}}
       </ul>
     </header>
+    {{#if error}}
+    <div id="notifications">
+      <p>{{error}}</p>
+    </div>
+    {{/if}}
+
     {{{body}}}
   </div>
 

@@ -23,11 +23,11 @@ const userSchema = new mongoose.Schema({
 //     next();
 // });
 
-userSchema.virtual('repeatPassword').set(function(value) {
-    if (this.password !== value) {
-        throw new Error('Repeat password should match password')
-    }
-});
+// userSchema.virtual('repeatPassword').set(function(value) {
+//     if (this.password !== value) {
+//         throw new Error('Repeat password should match password')
+//     }
+// });
 
 const User = mongoose.model('User', userSchema);
 
