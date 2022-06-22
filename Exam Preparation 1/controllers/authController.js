@@ -37,7 +37,7 @@ router.post('/register', isGuest, async(req, res) => {
         const token = await authService.createToken(createdUser)
 
         res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
-        res.redirect('/login');
+        res.redirect('login');
     } catch (error) {
         return res.render('auth/register', { error: getErrorMessage(error) })
     }
