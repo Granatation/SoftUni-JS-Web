@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { isAuth } = require('../middlewares/authMiddleware');
 const { preloadPublication, isPublicationAuthor } = require('../middlewares/publicationMiddleware');
 const publicationService = require('../services/publicationService');
+const userService = require('../services/userService');
 const { getErrorMessage } = require('../utils/errorHelpers');
 
 router.get('/', async(req, res) => {
@@ -42,10 +43,11 @@ router.get('/create', isAuth, (req, res) => {
 });
 
 router.post('/create', isAuth, async(req, res) => {
-    const publicationData = {...req.body, author: req.user }
-    try {
-        await publicationService.create(publicationData);
+    const publicationData = {...req.body, author: req.user };
 
+    try {
+        const publication = await publicationService.create(publicationData);
+        await userService.addPublication(req.user._id, publication._id)
         res.redirect('/publications');
 
     } catch (error) {
@@ -54,16 +56,21 @@ router.post('/create', isAuth, async(req, res) => {
 });
 
 router.get('/:publicationId/delete', isAuth, preloadPublication, isPublicationAuthor, async(req, res) => {
+    const publication = await publicationService.getOne(req.params.publicationId).lean();
     await publicationService.delete(req.params.publicationId);
+    await userService.deletePublication(req.user._id, publication._id);
 
     res.render('home')
 });
 
 router.get('/:publicationId/share', isAuth, async(req, res) => {
     const publication = await publicationService.getOne(req.params.publicationId);
+    const user = await userService.getOne(req.user._id);
 
     publication.usersShared.push(req.user._id);
+    user.shares.push(publication);
 
+    await user.save();
     await publication.save();
 
     res.redirect('/')

@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     myPublications: [{
         type: mongoose.Types.ObjectId,
         ref: 'Publication'
+    }],
+    shares: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Publication'
     }]
 });
 
