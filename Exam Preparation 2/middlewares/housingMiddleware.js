@@ -9,7 +9,7 @@ exports.preloadHousing = async(req, res, next) => {
 }
 
 exports.isHousingAuthor = (req, res, next) => {
-    if (req.housing.author != req.user._id) {
+    if (req.housing.owner._id != req.user._id) {
         next({ message: 'You are not authorized', status: 401 })
     }
 

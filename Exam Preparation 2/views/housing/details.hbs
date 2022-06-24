@@ -13,25 +13,27 @@
                         <h4>City: {{city}}</h4>
                         <p>Description: {{description}}</p>
 
+                        {{#if renters}}
                         <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
-                        <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
-
+                        <p>People rented this housing: {{renters}}</p>
+                        {{else}}
                         <!-- If not display: -->
                         <p>People rented this housing: There are no tenants yet.</p>
+                        {{/if}}
                     </div>
                 </div>
 
                 <!-- if there is no registered user, do not display buttons-->
                 <div class="product-btn">
                     {{#if isAuthor}}
-                        <a href="/housings/:housingId/edit" class="edit">Edit</a>
-                        <a href="/housings/:housingId/delete" class="remove">Delete</a>
+                        <a href="/housings/{{_id}}/edit" class="edit">Edit</a>
+                        <a href="/housings/{{_id}}/delete" class="remove">Delete</a>
                     {{else}}
 
                         {{#if isRented}}
                         <p class="alRentHome">You have already rent this home</p>
                         {{else}}
-                        <a href="/housings/:housingId/rent" class="rentHome">Rent a home, available {{availablePieces}} housing</a>
+                        <a href="/housings/{{_id}}/rent" class="rentHome">Rent a home, available {{availablePieces}} housing</a>
                         {{/if}}
 
                         {{#if isNotAvailable}}

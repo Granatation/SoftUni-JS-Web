@@ -1,11 +1,8 @@
 const router = require('express').Router();
 
-const mongoose = require('mongoose');
-
 const { isAuth } = require('../middlewares/authMiddleware');
-// const { preloadHousing, isHousingAuthor } = require('../middlewares/housingMiddleware');
+const { preloadHousing, isHousingAuthor } = require('../middlewares/housingMiddleware');
 const housingService = require('../services/housingService');
-const userService = require('../services/userService');
 const { getErrorMessage } = require('../utils/errorHelpers');
 
 router.get('/', async(req, res) => {
@@ -17,27 +14,28 @@ router.get('/', async(req, res) => {
 router.get('/:housingId/details', async(req, res) => {
     const housingLean = await housingService.getOneDetailed(req.params.housingId).lean();
     const housing = await housingService.getOneDetailed(req.params.housingId)
-    const isAuthor = req.user && housing.owner == req.user._id;
-    const isRented = housing.renters.includes(mongoose.Types.ObjectId(req.user._id));
-    const isNotAvailable = housing.availablePieces == 0
+    const isAuthor = req.user && housing.owner._id == req.user._id;
+    const isRented = housing.renters.some(x => x._id == req.user._id);
+    const isNotAvailable = housing.availablePieces == 0;
+    const renters = housing.renters.map(x => x.name).join(', ')
 
-    res.render('housing/details', {...housingLean, isAuthor, isRented, isNotAvailable });
+    res.render('housing/details', {...housingLean, isAuthor, isRented, isNotAvailable, renters });
 });
 
-// router.get('/:publicationId/edit', isAuth, preloadPublication, isPublicationAuthor, async(req, res) => {
+router.get('/:housingId/edit', isAuth, preloadHousing, isHousingAuthor, (req, res) => {
 
-//     res.render('publication/edit', {...req.publication })
-// });
+    res.render('housing/edit', {...req.housing })
+});
 
-// router.post('/:publicationId/edit', isAuth, preloadPublication, isPublicationAuthor, async(req, res) => {
-//     try {
-//         await publicationService.update(req.params.publicationId, req.body);
+router.post('/:housingId/edit', isAuth, preloadHousing, isHousingAuthor, async(req, res) => {
+    try {
+        await housingService.update(req.params.housingId, req.body);
 
-//         res.redirect(`/publications/${req.params.publicationId}/details`);
-//     } catch (error) {
-//         res.render('publication/edit', {...req.body, error: getErrorMessage(error) })
-//     }
-// });
+        res.redirect(`/housings/${req.params.housingId}/details`);
+    } catch (error) {
+        res.render('housing/edit', {...req.body, error: getErrorMessage(error) })
+    }
+});
 
 router.get('/create', isAuth, (req, res) => {
     res.render('housing/create');
@@ -55,25 +53,40 @@ router.post('/create', isAuth, async(req, res) => {
     }
 });
 
-// router.get('/:publicationId/delete', isAuth, preloadPublication, isPublicationAuthor, async(req, res) => {
-//     const publication = await publicationService.getOne(req.params.publicationId).lean();
-//     await publicationService.delete(req.params.publicationId);
-//     await userService.deletePublication(req.user._id, publication._id);
+router.get('/:housingId/delete', isAuth, preloadHousing, isHousingAuthor, async(req, res) => {
+    await housingService.delete(req.params.housingId);
+    const housings = await housingService.getAll().lean();
 
-//     res.render('home')
-// });
+    res.render('home', { housings })
+});
 
 router.get('/:housingId/rent', isAuth, async(req, res) => {
     const housing = await housingService.getOne(req.params.housingId);
-    const user = await userService.getOne(req.user._id);
 
-    housing.usersShared.push(req.user._id);
-    user.shares.push(housing);
+    housing.renters.push(req.user._id);
+    housing.availablePieces--;
 
-    await user.save();
     await housing.save();
 
     res.redirect('/')
+});
+
+router.get('/search', isAuth, async(req, res) => {
+    const housings = await housingService.getAll().lean()
+
+    res.render('housing/search', { housings });
+});
+
+router.post('/search', isAuth, async(req, res) => {
+    const housings = await housingService.getAll().lean()
+
+    for (const housing of housings) {
+        if (housing.type == req.body) {
+            result.push(housing)
+        }
+    }
+    console.log(result)
+    res.render('housing/search', { result });
 });
 
 module.exports = router;
