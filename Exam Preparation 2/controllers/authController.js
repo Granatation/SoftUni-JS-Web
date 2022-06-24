@@ -15,11 +15,15 @@ router.post('/login', isGuest, async(req, res) => {
     if (username == '' || password == '') {
         return res.render('auth/login', { error: 'Empty fields!' })
     }
-    const user = await authService.login(username, password)
-    const token = await authService.createToken(user)
+    try {
+        const user = await authService.login(username, password);
+        const token = await authService.createToken(user);
+        res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
+        res.redirect('/');
+    } catch (error) {
+        return res.render('auth/login', { error: getErrorMessage(error) })
+    }
 
-    res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
-    res.redirect('/')
 });
 
 router.get('/register', isGuest, (req, res) => {
@@ -27,13 +31,13 @@ router.get('/register', isGuest, (req, res) => {
 });
 
 router.post('/register', isGuest, async(req, res) => {
-    const { username, password, repassword, address } = req.body;
+    const { name, username, password, repeatPassword } = req.body;
 
-    if (password !== repassword) {
+    if (password !== repeatPassword) {
         return res.render('auth/register', { error: 'Password missmatch!' })
     }
     try {
-        const createdUser = await authService.create({ username, password, address })
+        const createdUser = await authService.create({ name, username, password })
         const token = await authService.createToken(createdUser)
 
         res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });

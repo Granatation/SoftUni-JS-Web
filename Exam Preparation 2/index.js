@@ -15,10 +15,10 @@ app.engine('hbs', hbs.engine({
 }));
 
 app.set('view engine', 'hbs');
-app.set('views', './Exam Preparation 1/views');
+app.set('views', './Exam Preparation 2/views');
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('./Exam Preparation 1/public'));
+app.use(express.static('./Exam Preparation 2/public'));
 app.use(cookieParser());
 app.use(errorHandler);
 app.use(auth);
