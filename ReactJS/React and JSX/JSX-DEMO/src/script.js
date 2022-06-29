@@ -12,4 +12,4 @@ const reactElement = (
     </header>
 );
 
-     root.render(reactElement);
+root.render(reactElement);
