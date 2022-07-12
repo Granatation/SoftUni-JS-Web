@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { Header } from './components/Header'
-import { BookList } from './components/BookList'
+import { Header } from './components/Header';
+import { BookList } from './components/BookList';
+import {Timer} from './components/Timer';
 
 function App() {
     const books = [
@@ -19,12 +20,13 @@ function App() {
             author: 'J.K. Rowling3',
             description: 'Nice3'
         },
-    ]
+    ];
 
     return (
         <div className="App">
             <Header logo={logo} />
             <BookList books={books}/>
+            <Timer/>
         </div>
     );
 }
