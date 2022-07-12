@@ -3,6 +3,8 @@ import './App.css';
 import { Header } from './components/Header';
 import { BookList } from './components/BookList';
 import {Timer} from './components/Timer';
+import {Clicker} from './components/Clicker'
+import {Counter} from './components/Counter'
 
 function App() {
     const books = [
@@ -26,6 +28,8 @@ function App() {
         <div className="App">
             <Header logo={logo} />
             <BookList books={books}/>
+            <Counter/>
+            <Clicker/>
             <Timer/>
         </div>
     );
