@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import {BookList} from './components/BookList';
+import {CharacterList} from './components/CharacterList'
 
 function App() {
   const books = [
@@ -24,6 +24,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <BookList books={books}/>
+        <CharacterList/>
       </header>
     </div>
   );
