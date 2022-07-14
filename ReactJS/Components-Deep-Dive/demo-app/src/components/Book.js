@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import styles from './Book.module.css'
 
 export const Book = (props) => {
     const [highlighted, setHighlighted] = useState(false);
@@ -31,14 +31,14 @@ export const Book = (props) => {
     };
 
     return (
-        <li style={style}>
+        <li style={style} className={styles['book-item']}>
             <article>
                 <h2>{props.book.title}</h2>
                 <main>{props.book.description}</main>
                 <footer>
                     <button onClick={clickHandler}>Highlight</button>
                     <button onClick={deleteHandler}>Delete</button>
-                    <span>Author: {props.book.author}</span>
+                    <span className={styles['author']}>Author: {props.book.author}</span>
                 </footer>
             </article>
         </li>);
