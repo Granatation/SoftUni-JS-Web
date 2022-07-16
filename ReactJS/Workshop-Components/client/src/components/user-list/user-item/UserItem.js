@@ -1,6 +1,6 @@
 export const UserItem = (props) => {
     return (
-        <>
+        <tr>
             <td>
                 <img src={props.user.imageUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"}
                     alt={`${props.user.firstName}'s profile`} className="image" />
@@ -29,7 +29,7 @@ export const UserItem = (props) => {
                         </path>
                     </svg>
                 </button>
-                <button className="btn info-btn" title="Info">
+                <button className="btn info-btn" title="Info" onClick={()=> props.onDetailsClick(props.user._id)}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info"
                         className="svg-inline--fa fa-info" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="-150 0 512 612">
@@ -39,6 +39,6 @@ export const UserItem = (props) => {
                     </svg>
                 </button>
             </td>
-        </>
+        </tr>
     );
 }
