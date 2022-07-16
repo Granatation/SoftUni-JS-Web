@@ -1,6 +1,6 @@
 export const UserItem = (props) => {
     return (
-        <tr>
+        <>
             <td>
                 <img src={props.user.imageUrl || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"}
                     alt={`${props.user.firstName}'s profile`} className="image" />
@@ -39,6 +39,6 @@ export const UserItem = (props) => {
                     </svg>
                 </button>
             </td>
-        </tr>
+        </>
     );
 }
