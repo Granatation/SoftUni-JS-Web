@@ -9,13 +9,6 @@ import { UserList } from './components/user-list/UserList';
 import './App.css'
 
 function App() {
-    const [users, setUsers] = useState()
-
-    useEffect(() => {
-        userService.getAll()
-            .then(users => setUsers(users))
-    }, []);
-
     return (
         <div>
             <Header />
@@ -24,7 +17,7 @@ function App() {
                 <section className="card users-container">
                     <SearchBar />
 
-                    <UserList users={users} />
+                    <UserList />
                 </section>
             </main>
 
