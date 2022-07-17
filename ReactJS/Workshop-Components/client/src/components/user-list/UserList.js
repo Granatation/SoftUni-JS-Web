@@ -4,24 +4,55 @@ import * as userService from '../../services/userService'
 
 import { UserItem } from "./user-item/UserItem";
 import { UserDetails } from "./user-details/UserDetails";
+import { UserEdit } from './user-edit/UserEdit';
+import { UserDelete } from './user-delete/UserDelete';
+
+const UserActions = {
+	Details: 'details',
+	Edit: 'edit',
+	Delete: 'delete'
+}
 
 export const UserList = (props) => {
-	const [selectedUser, setSelectedUser] = useState(null)
+	const [userAction, setUserAction] = useState({ user: null, action: null });
 
 	const detailsClickHandler = (userId) => {
 		userService.getOne(userId)
-			.then(user => setSelectedUser(user))
+			.then(user => {
+				setUserAction({ user, action: UserActions.Details })
+			})
 	}
 
-	const detailsCloseHandler = () => {
-		setSelectedUser(null)
+	const editClickHandler = (userId) => {
+		userService.getOne(userId)
+			.then(user => {
+				setUserAction({ user, action: UserActions.Edit })
+			})
+	}
+
+	const deleteClickHandler = (userId) => {
+		userService.getOne(userId)
+			.then(user => {
+				setUserAction({ user, action: UserActions.Delete })
+			})
+	}
+
+	const closeHandler = () => {
+		setUserAction({ user: null, action: null })
 	}
 
 	return (
 		<div className="table-wrapper">
 			{/* Overlap components  */}
 
-			{selectedUser && <UserDetails user={selectedUser} onClose={detailsCloseHandler} />}
+			{userAction.action == UserActions.Details &&
+				<UserDetails user={userAction.user} onClose={closeHandler} />}
+
+			{userAction.action == UserActions.Edit &&
+				<UserEdit user={userAction.user} onClose={closeHandler} />}
+
+			{userAction.action == UserActions.Delete &&
+				<UserDelete user={userAction.user} onClose={closeHandler} />}
 
 			<table className="table">
 				<thead>
@@ -80,7 +111,12 @@ export const UserList = (props) => {
 				</thead>
 				<tbody>
 					{props.users ?
-						props.users.map(user => <UserItem key={user._id} user={user} onDetailsClick={detailsClickHandler} />)
+						props.users.map(user =>
+							<UserItem key={user._id} user={user}
+								onDetailsClick={detailsClickHandler}
+								onEditClick={editClickHandler}
+								onDeleteClick={deleteClickHandler}
+							/>)
 						: <div>Loading</div>}
 				</tbody>
 			</table>
