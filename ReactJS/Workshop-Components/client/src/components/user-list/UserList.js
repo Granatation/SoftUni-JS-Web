@@ -46,13 +46,13 @@ export const UserList = () => {
 			address
 		})
 			.then(user => {
-				setUsers(oldUsers => [...oldUsers, user]);
+				setUsers(oldUsers => [...oldUsers, user.user]);
 				closeHandler();
 			});
 	}
 
 	const userEditHandler = (e) => {
-		
+
 
 		const formData = new FormData(e.target)
 		const {
@@ -77,6 +77,16 @@ export const UserList = () => {
 			});
 	}
 
+	const userDeleteHandler = (e) => {
+		e.preventDefault();
+
+		userService.deleteAcc(userAction.user._id)
+			.then(user => {
+				setUsers(oldUsers =>oldUsers.filter(x => x._id != user.userId))
+				closeHandler();
+			})
+	}
+
 	const detailsClickHandler = (userId) => {
 		userService.getOne(userId)
 			.then(user => {
@@ -94,7 +104,7 @@ export const UserList = () => {
 	const deleteClickHandler = (userId) => {
 		userService.getOne(userId)
 			.then(user => {
-				setUserAction({ user, action: UserActions.Delete });
+				setUserAction({ user: user, action: UserActions.Delete });
 			})
 	}
 
@@ -121,7 +131,7 @@ export const UserList = () => {
 					<UserEdit user={userAction.user} onClose={closeHandler} onUserEdit={userEditHandler} />}
 
 				{userAction.action == UserActions.Delete &&
-					<UserDelete user={userAction.user} onClose={closeHandler} />}
+					<UserDelete onClose={closeHandler} onUserDelete={userDeleteHandler} />}
 
 				{userAction.action == UserActions.Add &&
 					<UserCreate onClose={closeHandler} onUserCreate={userCreateHandler} />}
