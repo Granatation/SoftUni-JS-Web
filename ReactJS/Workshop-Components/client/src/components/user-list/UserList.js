@@ -24,55 +24,20 @@ export const UserList = () => {
 			.then(users => setUsers(users))
 	}, []);
 
-	const userCreateHandler = (e) => {
-		e.preventDefault();
-
-		const formData = new FormData(e.target)
-		const {
-			firstName,
-			lastName,
-			email,
-			imageUrl,
-			phoneNumber,
-			...address
-		} = Object.fromEntries(formData)
-
-		userService.create({
-			firstName,
-			lastName,
-			email,
-			imageUrl,
-			phoneNumber,
-			address
-		})
+	const userCreateHandler = (userData) => {
+		userService.create(userData)
 			.then(user => {
 				setUsers(oldUsers => [...oldUsers, user.user]);
 				closeHandler();
 			});
 	}
 
-	const userEditHandler = (e) => {
-
-
-		const formData = new FormData(e.target)
-		const {
-			firstName,
-			lastName,
-			email,
-			imageUrl,
-			phoneNumber,
-			...address
-		} = Object.fromEntries(formData)
-
-		userService.edit({
-			firstName,
-			lastName,
-			email,
-			imageUrl,
-			phoneNumber,
-			address
-		}, userAction.user._id)
+	const userEditHandler = (userData, user) => {
+		userService.edit(userData, user._id)
 			.then(() => {
+				setUsers(oldUsers => {
+					oldUsers.find(userData.email == user.email)
+				});
 				closeHandler();
 			});
 	}
@@ -82,7 +47,7 @@ export const UserList = () => {
 
 		userService.deleteAcc(userAction.user._id)
 			.then(user => {
-				setUsers(oldUsers =>oldUsers.filter(x => x._id != user.userId))
+				setUsers(oldUsers => oldUsers.filter(x => x._id != user.userId))
 				closeHandler();
 			})
 	}
