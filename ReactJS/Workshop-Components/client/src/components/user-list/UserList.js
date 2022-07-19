@@ -34,9 +34,15 @@ export const UserList = () => {
 
 	const userEditHandler = (userData, user) => {
 		userService.edit(userData, user._id)
-			.then(() => {
+			.then(edittedUser => {
 				setUsers(oldUsers => {
-					oldUsers.find(userData.email == user.email)
+					for (let i = 0; i < oldUsers.length; i++) {
+						if(oldUsers[i]._id == edittedUser.user._id){
+							oldUsers[i] = edittedUser.user
+						}
+					}
+			
+					return oldUsers;
 				});
 				closeHandler();
 			});
