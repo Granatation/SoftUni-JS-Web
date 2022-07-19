@@ -37,17 +37,26 @@ export const edit = async (userData, userId) => {
         body: JSON.stringify(userData)
     });
 
-    const result = await response.json();
+    if (response.ok) {
+        const result = await response.json();
 
-    return result
+        return result
+    } else {
+        throw new Error
+    }
+
 }
 
-export const deleteAcc = async ( userId) => {
+export const deleteAcc = async (userId) => {
     const response = await fetch(`${baseUrl}/${userId}`, {
         method: 'DELETE'
     });
 
-    const result = await response.json();
+    if (response.ok) {
+        const result = await response.json();
 
-    return result
+        return result
+    } else {
+        throw new Error
+    }
 }

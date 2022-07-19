@@ -29,7 +29,10 @@ export const UserList = () => {
 			.then(user => {
 				setUsers(oldUsers => [...oldUsers, user.user]);
 				closeHandler();
-			});
+			})
+			.catch(err => {
+				console.log(err);
+			})
 	}
 
 	const userEditHandler = (userData, user) => {
@@ -37,15 +40,18 @@ export const UserList = () => {
 			.then(edittedUser => {
 				setUsers(oldUsers => {
 					for (let i = 0; i < oldUsers.length; i++) {
-						if(oldUsers[i]._id == edittedUser.user._id){
+						if (oldUsers[i]._id == edittedUser.user._id) {
 							oldUsers[i] = edittedUser.user
 						}
 					}
-			
+
 					return oldUsers;
 				});
 				closeHandler();
-			});
+			})
+			.catch(err => {
+				console.log(err);
+			})
 	}
 
 	const userDeleteHandler = (e) => {

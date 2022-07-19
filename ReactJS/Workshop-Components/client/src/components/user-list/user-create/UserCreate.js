@@ -4,7 +4,7 @@ export const UserCreate = ({
     onClose,
     onUserCreate
 }) => {
-    const [errors, setErrors] = useState('')
+    const [errors, setErrors] = useState({})
     const [values, setValues] = useState({
         firstName: '',
         lastName: '',
@@ -47,8 +47,9 @@ export const UserCreate = ({
             ...state,
             [e.target.name]: number < 0
         }))
-
     }
+
+    const isFormValid = Object.values(errors).some(x => x)
 
     return (
         <div className="overlay">
@@ -176,7 +177,7 @@ export const UserCreate = ({
                             </div>
                         </div>
                         <div id="form-actions">
-                            <button id="action-save" className="btn" type="submit">Save</button>
+                            <button id="action-save" className="btn" type="submit" disabled={isFormValid}>Save</button>
                             <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                                 Cancel
                             </button>
