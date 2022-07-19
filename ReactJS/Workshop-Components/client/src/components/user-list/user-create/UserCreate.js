@@ -4,13 +4,14 @@ export const UserCreate = ({
     onClose,
     onUserCreate
 }) => {
+    const [firstNameHasError, setFirstNameHasError] = useState('')
     const [values, setValues] = useState({
         firstName: '',
         lastName: '',
         email: '',
         phoneNumber: '',
         imageUrl: '',
-        country:'',
+        country: '',
         city: '',
         street: '',
         streetNumber: ''
@@ -31,6 +32,15 @@ export const UserCreate = ({
         userData.address = { country, city, street, streetNumber };
 
         onUserCreate(userData);
+    }
+
+    const validateFirstName = (e) => {
+        if (values.firstName.length < 3) {
+            setFirstNameHasError(true);
+        }
+        else {
+            setFirstNameHasError(false);
+        }
     }
 
     return (
@@ -55,11 +65,14 @@ export const UserCreate = ({
                                 <label htmlFor="firstName">First name</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-user"></i></span>
-                                    <input id="firstName" name="firstName" type="text" value={values.firstName} onChange={changeHandler} />
+                                    <input id="firstName" name="firstName" type="text" value={values.firstName} onChange={changeHandler} onBlur={validateFirstName} />
                                 </div>
-                                <p className="form-error">
-                                    First name should be at least 3 characters long!
-                                </p>
+                                {
+                                    firstNameHasError &&
+                                    <p className="form-error">
+                                        First name should be at least 3 characters long!
+                                    </p>
+                                }
                             </div>
                             <div className="form-group">
                                 <label htmlFor="lastName">Last name</label>
