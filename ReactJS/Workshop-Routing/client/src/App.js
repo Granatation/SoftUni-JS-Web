@@ -1,249 +1,189 @@
 import './App.css';
 
+import { Header } from './components/Header/Header'
+import { Home } from './components/Home/Home'
+
+
 function App() {
   return (
     <div id="box">
 
-        <header>
-            <h1><a class="home" href="#">GamesPlay</a></h1>
-            <nav>
-                <a href="#">All games</a>
-                <div id="user">
-                    <a href="#">Create Game</a>
-                    <a href="#">Logout</a>
-                </div>
-                <div id="guest">
-                    <a href="#">Login</a>
-                    <a href="#">Register</a>
-                </div>
-            </nav>
-        </header>
+      <Header />
 
-        <main id="main-content">
-        </main>
+      <main id="main-content">
+        <Home />
+      </main>
 
-        <section id="welcome-world">
+      {/* <section id="login-page" class="auth">
+        <form id="login">
 
-            <div class="welcome-message">
-                <h2>ALL new games are</h2>
-                <h3>Only in GamesPlay</h3>
-            </div>
-            <img src="./images/four_slider_img01.png" alt="hero"/>
+          <div class="container">
+            <div class="brand-logo"></div>
+            <h1>Login</h1>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Sokka@gmail.com" />
 
-            <div id="home-page">
-                <h1>Latest Games</h1>
+            <label for="login-pass">Password:</label>
+            <input type="password" id="login-password" name="password" />
+            <input type="submit" class="btn submit" value="Login" />
+            <p class="field">
+              <span>If you don't have profile click <a href="#">here</a></span>
+            </p>
+          </div>
+        </form>
+      </section> */}
 
-                <div class="game">
-                    <div class="image-wrap">
-                        <img src="./images/CoverFire.png"/>
-                    </div>
-                    <h3>Cover Fire</h3>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                    <div class="data-buttons">
-                        <a href="#" class="btn details-btn">Details</a>
-                    </div>
-                </div>
-                <div class="game">
-                    <div class="image-wrap">
-                        <img src="./images/ZombieLang.png"/>
-                    </div>
-                    <h3>Zombie Lang</h3>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                    <div class="data-buttons">
-                        <a href="#" class="btn details-btn">Details</a>
-                    </div>
-                </div>
-                <div class="game">
-                    <div class="image-wrap">
-                        <img src="./images/MineCraft.png"/>
-                    </div>
-                    <h3>MineCraft</h3>
-                    <div class="rating">
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                    </div>
-                    <div class="data-buttons">
-                        <a href="#" class="btn details-btn">Details</a>
-                    </div>
-                </div>
+      {/* <section id="register-page" class="content auth">
+        <form id="register">
+          <div class="container">
+            <div class="brand-logo"></div>
+            <h1>Register</h1>
 
-                <p class="no-articles">No games yet</p>
-            </div>
-        </section>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="maria@email.com" />
 
-        <section id="login-page" class="auth">
-            <form id="login">
+            <label for="pass">Password:</label>
+            <input type="password" name="password" id="register-password" />
 
-                <div class="container">
-                    <div class="brand-logo"></div>
-                    <h1>Login</h1>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Sokka@gmail.com"/>
+            <label for="con-pass">Confirm Password:</label>
+            <input type="password" name="confirm-password" id="confirm-password" />
 
-                    <label for="login-pass">Password:</label>
-                    <input type="password" id="login-password" name="password"/>
-                    <input type="submit" class="btn submit" value="Login"/>
-                    <p class="field">
-                        <span>If you don't have profile click <a href="#">here</a></span>
-                    </p>
-                </div>
-            </form>
-        </section>
+            <input class="btn submit" type="submit" value="Register" />
 
-        <section id="register-page" class="content auth">
-            <form id="register">
-                <div class="container">
-                    <div class="brand-logo"></div>
-                    <h1>Register</h1>
+            <p class="field">
+              <span>If you already have profile click <a href="#">here</a></span>
+            </p>
+          </div>
+        </form>
+      </section> */}
 
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="maria@email.com"/>
+      {/* <section id="create-page" class="auth">
+        <form id="create">
+          <div class="container">
 
-                    <label for="pass">Password:</label>
-                    <input type="password" name="password" id="register-password"/>
+            <h1>Create Game</h1>
+            <label for="leg-title">Legendary title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter game title..." />
 
-                    <label for="con-pass">Confirm Password:</label>
-                    <input type="password" name="confirm-password" id="confirm-password"/>
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" placeholder="Enter game category..." />
 
-                    <input class="btn submit" type="submit" value="Register"/>
+            <label for="levels">MaxLevel:</label>
+            <input type="number" id="maxLevel" name="maxLevel" min="1" placeholder="1" />
 
-                    <p class="field">
-                        <span>If you already have profile click <a href="#">here</a></span>
-                    </p>
-                </div>
-            </form>
-        </section>
+            <label for="game-img">Image:</label>
+            <input type="text" id="imageUrl" name="imageUrl" placeholder="Upload a photo..." />
 
-        <section id="create-page" class="auth">
-            <form id="create">
-                <div class="container">
+            <label for="summary">Summary:</label>
+            <textarea name="summary" id="summary"></textarea>
+            <input class="btn submit" type="submit" value="Create Game" />
+          </div>
+        </form>
+      </section> */}
 
-                    <h1>Create Game</h1>
-                    <label for="leg-title">Legendary title:</label>
-                    <input type="text" id="title" name="title" placeholder="Enter game title..."/>
+      {/* <section id="edit-page" class="auth">
+        <form id="edit">
+          <div class="container">
 
-                    <label for="category">Category:</label>
-                    <input type="text" id="category" name="category" placeholder="Enter game category..."/>
+            <h1>Edit Game</h1>
+            <label for="leg-title">Legendary title:</label>
+            <input type="text" id="title" name="title" value="" />
 
-                    <label for="levels">MaxLevel:</label>
-                    <input type="number" id="maxLevel" name="maxLevel" min="1" placeholder="1"/>
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="" />
 
-                    <label for="game-img">Image:</label>
-                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Upload a photo..."/>
+            <label for="levels">MaxLevel:</label>
+            <input type="number" id="maxLevel" name="maxLevel" min="1" value="" />
 
-                    <label for="summary">Summary:</label>
-                    <textarea name="summary" id="summary"></textarea>
-                    <input class="btn submit" type="submit" value="Create Game"/>
-                </div>
-            </form>
-        </section>
+            <label for="game-img">Image:</label>
+            <input type="text" id="imageUrl" name="imageUrl" value="" />
 
-        <section id="edit-page" class="auth">
-            <form id="edit">
-                <div class="container">
+            <label for="summary">Summary:</label>
+            <textarea name="summary" id="summary"></textarea>
+            <input class="btn submit" type="submit" value="Edit Game" />
 
-                    <h1>Edit Game</h1>
-                    <label for="leg-title">Legendary title:</label>
-                    <input type="text" id="title" name="title" value=""/>
+          </div>
+        </form>
+      </section> */}
 
-                    <label for="category">Category:</label>
-                    <input type="text" id="category" name="category" value=""/>
+      {/* <section id="game-details">
+        <h1>Game Details</h1>
+        <div class="info-section">
 
-                    <label for="levels">MaxLevel:</label>
-                    <input type="number" id="maxLevel" name="maxLevel" min="1" value=""/>
+          <div class="game-header">
+            <img class="game-img" src="images/MineCraft.png" />
+            <h1>Bright</h1>
+            <span class="levels">MaxLevel: 4</span>
+            <p class="type">Action, Crime, Fantasy</p>
+          </div>
 
-                    <label for="game-img">Image:</label>
-                    <input type="text" id="imageUrl" name="imageUrl" value=""/>
+          <p class="text">
+            Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work
+            with an Orc to find a weapon everyone is prepared to kill for. Set in a world where fantasy
+            creatures live side by side with humans. A human cop is forced
+            to work with an Orc to find a weapon everyone is prepared to kill for.
+          </p>
 
-                    <label for="summary">Summary:</label>
-                    <textarea name="summary" id="summary"></textarea>
-                    <input class="btn submit" type="submit" value="Edit Game"/>
+          <div class="details-comments">
+            <h2>Comments:</h2>
+            <ul>
+              <li class="comment">
+                <p>Content: I rate this one quite highly.</p>
+              </li>
+              <li class="comment">
+                <p>Content: The best game.</p>
+              </li>
+            </ul>
+            <p class="no-comment">No comments.</p>
+          </div>
 
-                </div>
-            </form>
-        </section>
+          <div class="buttons">
+            <a href="#" class="button">Edit</a>
+            <a href="#" class="button">Delete</a>
+          </div>
+        </div>
 
-        <section id="game-details">
-            <h1>Game Details</h1>
-            <div class="info-section">
+        <article class="create-comment">
+          <label>Add new comment:</label>
+          <form class="form">
+            <textarea name="comment" placeholder="Comment......"></textarea>
+            <input class="btn submit" type="submit" value="Add Comment" />
+          </form>
+        </article>
 
-                <div class="game-header">
-                    <img class="game-img" src="images/MineCraft.png" />
-                    <h1>Bright</h1>
-                    <span class="levels">MaxLevel: 4</span>
-                    <p class="type">Action, Crime, Fantasy</p>
-                </div>
+      </section> */}
 
-                <p class="text">
-                    Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work
-                    with an Orc to find a weapon everyone is prepared to kill for. Set in a world where fantasy
-                    creatures live side by side with humans. A human cop is forced
-                    to work with an Orc to find a weapon everyone is prepared to kill for.
-                </p>
+      {/* <section id="catalog-page">
+        <h1>All Games</h1>
+        <div class="allGames">
+          <div class="allGames-info">
+            <img src="./images/avatar-1.jpg" />
+            <h6>Action</h6>
+            <h2>Cover Fire</h2>
+            <a href="#" class="details-button">Details</a>
+          </div>
 
-                <div class="details-comments">
-                    <h2>Comments:</h2>
-                    <ul>
-                        <li class="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li class="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
-                    <p class="no-comment">No comments.</p>
-                </div>
+        </div>
+        <div class="allGames">
+          <div class="allGames-info">
+            <img src="./images/avatar-1.jpg" />
+            <h6>Action</h6>
+            <h2>Zombie lang</h2>
+            <a href="#" class="details-button">Details</a>
+          </div>
 
-                <div class="buttons">
-                    <a href="#" class="button">Edit</a>
-                    <a href="#" class="button">Delete</a>
-                </div>
-            </div>
+        </div>
+        <div class="allGames">
+          <div class="allGames-info">
+            <img src="./images/avatar-1.jpg" />
+            <h6>Action</h6>
+            <h2>MineCraft</h2>
+            <a href="#" class="details-button">Details</a>
+          </div>
+        </div>
 
-            <article class="create-comment">
-                <label>Add new comment:</label>
-                <form class="form">
-                    <textarea name="comment" placeholder="Comment......"></textarea>
-                    <input class="btn submit" type="submit" value="Add Comment"/>
-                </form>
-            </article>
-
-        </section>
-
-        <section id="catalog-page">
-            <h1>All Games</h1>
-            <div class="allGames">
-                <div class="allGames-info">
-                    <img src="./images/avatar-1.jpg"/>
-                    <h6>Action</h6>
-                    <h2>Cover Fire</h2>
-                    <a href="#" class="details-button">Details</a>
-                </div>
-
-            </div>
-            <div class="allGames">
-                <div class="allGames-info">
-                    <img src="./images/avatar-1.jpg"/>
-                    <h6>Action</h6>
-                    <h2>Zombie lang</h2>
-                    <a href="#" class="details-button">Details</a>
-                </div>
-
-            </div>
-            <div class="allGames">
-                <div class="allGames-info">
-                    <img src="./images/avatar-1.jpg"/>
-                    <h6>Action</h6>
-                    <h2>MineCraft</h2>
-                    <a href="#" class="details-button">Details</a>
-                </div>
-            </div>
-
-            <h3 class="no-articles">No articles yet</h3>
-        </section>
+        <h3 class="no-articles">No articles yet</h3>
+      </section> */}
     </div>
   );
 }
