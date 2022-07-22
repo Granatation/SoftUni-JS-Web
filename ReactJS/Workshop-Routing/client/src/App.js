@@ -2,6 +2,10 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Header } from './components/Header/Header'
 import { Home } from './components/Home/Home'
+import { Login } from './components/Login/Login';
+import { Register } from './components/Register/Register';
+import { Create } from './components/Create/Create';
+import { Catalog } from './components/Catalog/Catalog';
 
 import './App.css';
 
@@ -14,75 +18,12 @@ function App() {
       <main id="main-content">
         <Routes>
           <Route path='/' element={<Home />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<Register />}/>
+          <Route path='/create' element={<Create />}/>
+          <Route path='/catalog' element={<Catalog />}/>
         </Routes>
       </main>
-
-      {/* <section id="login-page" class="auth">
-        <form id="login">
-
-          <div class="container">
-            <div class="brand-logo"></div>
-            <h1>Login</h1>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Sokka@gmail.com" />
-
-            <label for="login-pass">Password:</label>
-            <input type="password" id="login-password" name="password" />
-            <input type="submit" class="btn submit" value="Login" />
-            <p class="field">
-              <span>If you don't have profile click <a href="#">here</a></span>
-            </p>
-          </div>
-        </form>
-      </section> */}
-
-      {/* <section id="register-page" class="content auth">
-        <form id="register">
-          <div class="container">
-            <div class="brand-logo"></div>
-            <h1>Register</h1>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="maria@email.com" />
-
-            <label for="pass">Password:</label>
-            <input type="password" name="password" id="register-password" />
-
-            <label for="con-pass">Confirm Password:</label>
-            <input type="password" name="confirm-password" id="confirm-password" />
-
-            <input class="btn submit" type="submit" value="Register" />
-
-            <p class="field">
-              <span>If you already have profile click <a href="#">here</a></span>
-            </p>
-          </div>
-        </form>
-      </section> */}
-
-      {/* <section id="create-page" class="auth">
-        <form id="create">
-          <div class="container">
-
-            <h1>Create Game</h1>
-            <label for="leg-title">Legendary title:</label>
-            <input type="text" id="title" name="title" placeholder="Enter game title..." />
-
-            <label for="category">Category:</label>
-            <input type="text" id="category" name="category" placeholder="Enter game category..." />
-
-            <label for="levels">MaxLevel:</label>
-            <input type="number" id="maxLevel" name="maxLevel" min="1" placeholder="1" />
-
-            <label for="game-img">Image:</label>
-            <input type="text" id="imageUrl" name="imageUrl" placeholder="Upload a photo..." />
-
-            <label for="summary">Summary:</label>
-            <textarea name="summary" id="summary"></textarea>
-            <input class="btn submit" type="submit" value="Create Game" />
-          </div>
-        </form>
-      </section> */}
 
       {/* <section id="edit-page" class="auth">
         <form id="edit">
@@ -154,38 +95,6 @@ function App() {
           </form>
         </article>
 
-      </section> */}
-
-      {/* <section id="catalog-page">
-        <h1>All Games</h1>
-        <div class="allGames">
-          <div class="allGames-info">
-            <img src="./images/avatar-1.jpg" />
-            <h6>Action</h6>
-            <h2>Cover Fire</h2>
-            <a href="#" class="details-button">Details</a>
-          </div>
-
-        </div>
-        <div class="allGames">
-          <div class="allGames-info">
-            <img src="./images/avatar-1.jpg" />
-            <h6>Action</h6>
-            <h2>Zombie lang</h2>
-            <a href="#" class="details-button">Details</a>
-          </div>
-
-        </div>
-        <div class="allGames">
-          <div class="allGames-info">
-            <img src="./images/avatar-1.jpg" />
-            <h6>Action</h6>
-            <h2>MineCraft</h2>
-            <a href="#" class="details-button">Details</a>
-          </div>
-        </div>
-
-        <h3 class="no-articles">No articles yet</h3>
       </section> */}
     </div>
   );
