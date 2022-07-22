@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate  } from 'react-router-dom';
+import { useEffect, useState} from "react";
+import uniqid from 'uniqid'
 
 import { Header } from './components/Header/Header'
 import { Home } from './components/Home/Home'
@@ -15,6 +16,7 @@ import './App.css';
 
 function App() {
   const [games, setGames] = useState([]);
+  const navigate = useNavigate();
 
   const addComment = (gameId, comment) => {
     setGames(state => {
@@ -37,6 +39,17 @@ function App() {
       })
   }, []);
 
+  const addGameHandler = (gameData) => {
+    setGames(state => [
+      ...state,
+      {
+        ...gameData,
+        _id: uniqid()
+      }
+    ]);
+    navigate('/catalog')
+  }
+
   return (
     <div id="box">
 
@@ -47,9 +60,9 @@ function App() {
           <Route path='/' element={<Home games={games} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/create' element={<Create />} />
+          <Route path='/create' element={<Create addGame={addGameHandler} />} />
           <Route path='/catalog' element={<Catalog games={games} />} />
-          <Route path='/catalog/:gameId' element={<GameDetails games={games} addComment={addComment}/>} />
+          <Route path='/catalog/:gameId' element={<GameDetails games={games} addComment={addComment} />} />
         </Routes>
       </main>
 

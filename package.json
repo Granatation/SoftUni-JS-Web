@@ -33,6 +33,8 @@
     "mongoose": "^6.3.5",
     "page": "^1.11.6",
     "react-router-dom": "^6.3.0",
+    "uniqid": "^5.4.0",
+    "uniquid": "^1.1.4",
     "validator": "^13.7.0"
   },
   "devDependencies": {
