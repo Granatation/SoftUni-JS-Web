@@ -8,8 +8,8 @@ import { Register } from './components/Register/Register';
 import { Create } from './components/Create/Create';
 import { Catalog } from './components/Catalog/Catalog';
 import { GameDetails } from './components/GameDetails/GameDetails';
-import * as gameService from './services/gameService';
 
+import * as gameService from './services/gameService';
 import './App.css';
 
 
@@ -35,7 +35,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/create' element={<Create />} />
           <Route path='/catalog' element={<Catalog games={games} />} />
-          <Route path='/catalog/:gameId' element={<GameDetails />} />
+          <Route path='/catalog/:gameId' element={<GameDetails games={games}/>} />
         </Routes>
       </main>
 

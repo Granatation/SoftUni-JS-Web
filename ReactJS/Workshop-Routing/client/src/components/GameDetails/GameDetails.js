@@ -1,49 +1,52 @@
-export const GameDetails = () => {
+import { useParams } from "react-router-dom";
+
+export const GameDetails = ({ games }) => {
+    const { gameId }= useParams();
+    const game = games.find(x => x._id == gameId);
+    
+
     return (
         <section id="game-details">
             <h1>Game Details</h1>
-            <div class="info-section">
+            <div className="info-section">
 
-                <div class="game-header">
-                    <img class="game-img" src="images/MineCraft.png" />
-                    <h1>Bright</h1>
-                    <span class="levels">MaxLevel: 4</span>
-                    <p class="type">Action, Crime, Fantasy</p>
+                <div className="game-header">
+                    <img className="game-img" src={game.imageUrl} />
+                    <h1>{game.title}</h1>
+                    <span className="levels">MaxLevel: {game.maxLevel}</span>
+                    <p className="type">{game.category}</p>
                 </div>
 
-                <p class="text">
-                    Set in a world where fantasy creatures live side by side with humans. A human cop is forced to work
-                    with an Orc to find a weapon everyone is prepared to kill for. Set in a world where fantasy
-                    creatures live side by side with humans. A human cop is forced
-                    to work with an Orc to find a weapon everyone is prepared to kill for.
+                <p className="text">
+                    {game.summary}
                 </p>
 
-                <div class="details-comments">
+                <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        <li class="comment">
+                        <li className="comment">
                             <p>Content: I rate this one quite highly.</p>
                         </li>
-                        <li class="comment">
+                        <li className="comment">
                             <p>Content: The best game.</p>
                         </li>
                     </ul>
-                    <p class="no-comment">No comments.</p>
+                    <p className="no-comment">No comments.</p>
                 </div>
 
-                <div class="buttons">
-                    <a href="#" class="button">Edit</a>
-                    <a href="#" class="button">Delete</a>
+                <div className="buttons">
+                    <a href="#" className="button">Edit</a>
+                    <a href="#" className="button">Delete</a>
                 </div>
             </div>
 
-            <article class="create-comment">
+            {/* <article className="create-comment">
                 <label>Add new comment:</label>
-                <form class="form">
+                <form className="form">
                     <textarea name="comment" placeholder="Comment......"></textarea>
-                    <input class="btn submit" type="submit" value="Add Comment" />
+                    <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
-            </article>
+            </article> */}
 
         </section>
     );
