@@ -1,9 +1,28 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-export const GameDetails = ({ games }) => {
-    const { gameId }= useParams();
+export const GameDetails = ({ games, addComment }) => {
+    const { gameId } = useParams();
     const game = games.find(x => x._id == gameId);
-    
+
+    const [comment, setComment] = useState({
+        username: '',
+        comment: ''
+    })
+
+    const addCommentHandler = (e) => {
+        e.preventDefault()
+
+        addComment(gameId, `${comment.username}: ${comment.comment}`)
+
+    }
+
+    const onChange = (e) => {
+        setComment(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }));
+    }
 
     return (
         <section id="game-details">
@@ -40,13 +59,30 @@ export const GameDetails = ({ games }) => {
                 </div>
             </div>
 
-            {/* <article className="create-comment">
+            <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
-                    <textarea name="comment" placeholder="Comment......"></textarea>
-                    <input className="btn submit" type="submit" value="Add Comment" />
+                <form className="form" onSubmit={addCommentHandler}>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="John Shelby"
+                        onChange={onChange}
+                        value={comment.username}
+                    />
+                    <textarea
+                        name="comment"
+                        placeholder="Comment......"
+                        onChange={onChange}
+                        value={comment.comment}
+                    />
+                    <input
+                        className="btn submit"
+                        type="submit"
+                        value="Add Comment"
+                        onChange={onChange}
+                    />
                 </form>
-            </article> */}
+            </article>
 
         </section>
     );
