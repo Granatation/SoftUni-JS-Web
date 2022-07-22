@@ -18,13 +18,13 @@ export const Navigation = () => {
 
                 <li>
                     <NavLink
-                        to='/products/2'
+                        to='/starships'
                         // style={({ isActive }) => ({
                         //     backgroundColor: isActive ? 'lightblue' : 'grey'
                         // })}
                         className={setStyle}
                     >
-                        Products
+                        Starships
                     </NavLink>
                 </li>
 

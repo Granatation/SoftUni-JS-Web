@@ -6,8 +6,8 @@ import { Pricing } from './components/Pricing'
 import { Contacts } from './components/Contacts'
 import { NotFound } from './components/NotFound';
 import { Navigation } from './components/Navigation';
-import { Products } from './components/Products';
-
+import { Starship } from './components/Starship';
+import { StarshipList } from './components/StarshipList';
 
 function App() {
   return (
@@ -21,8 +21,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/pricing/*" element={<Pricing />} />
         <Route path="/pricing/contacts" element={<Contacts />} />
-        <Route path="/products/:productId" element={<Products />} />
-        <Route path="/mill-falcon" element={<Navigate to='/products/10' replace/>} />
+        <Route path="/starships/:starshipId" element={<Starship />} />
+        <Route path="/starships" element={<StarshipList />} />
+        <Route path="/mill-falcon" element={<Navigate to='/starships/10' replace/>} />
         <Route path="contacts" element={<Contacts />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
